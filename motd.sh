@@ -11,7 +11,6 @@ BIN_GREP='/bin/grep'
 BIN_SED='/bin/sed'
 BIN_UPTIME='/usr/bin/uptime'
 BIN_CAT='/bin/cat'
-BIN_LSB_RELEASE='/usr/bin/lsb_release'
 BIN_UNAME='/bin/uname'
 BIN_FREE='/usr/bin/free'
 BIN_HEAD='/usr/bin/head'
@@ -38,7 +37,7 @@ ${COLOR_WHITE}Global IP Addresses       = ${COLOR_LIGHT_BLUE}$(${BIN_IP} addr sh
 ${COLOR_WHITE}VPN IP Address            = ${COLOR_LIGHT_BLUE}$(${BIN_IP} addr show tun0 2>/dev/null | ${BIN_GREP} 'inet ' | awk -F" " '{print $2}' | ${BIN_SED} ':a;N;$!ba;s/\n/, /g')
 ${COLOR_WHITE}Uptime                    = ${COLOR_LIGHT_BLUE}$(${BIN_UPTIME} | ${BIN_CUT} -d "," -f 1 | xargs)
 ${COLOR_WHITE}Load avg.                 = ${COLOR_LIGHT_BLUE}$(${BIN_UPTIME} | ${BIN_GREP} -o -e "load averages\?.*" | ${BIN_SED} -e "s/load averages\?: //")
-${COLOR_WHITE}Release                   = ${COLOR_LIGHT_BLUE}$(${BIN_LSB_RELEASE} -d --short)
+${COLOR_WHITE}Release                   = ${COLOR_LIGHT_BLUE}$(${BIN_AWK} -F= '/PRETTY_NAME=/ {gsub(/"/,""); print $2}' /etc/os-release)
 ${COLOR_WHITE}Kernel                    = ${COLOR_LIGHT_BLUE}$(${BIN_UNAME} -ro)
 ${COLOR_WHITE}CPU Usage (Core)          = ${COLOR_LIGHT_BLUE}$(echo $(${BIN_PS} -eo pcpu | ${BIN_AWK} 'NR>1' | ${BIN_AWK} '{tot=tot+$1} END {print tot}') / $(${BIN_CAT} /proc/cpuinfo | ${BIN_GREP} -c processor) | ${BIN_BC} )%
 ${COLOR_WHITE}Memory         Used/Total = ${COLOR_LIGHT_BLUE}$(${BIN_FREE} -m | ${BIN_HEAD} -n 2 | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_FREE} -m | ${BIN_HEAD} -n 2 | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})MB
