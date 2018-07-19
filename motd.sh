@@ -36,7 +36,7 @@ echo -e "
 ${COLOR_LIGHT_GREEN}$(${BIN_FIGLET} -ckw 80 -f slant $(${BIN_HOSTNAME} -s))
 ${COLOR_WHITE}Date et heure                  = ${COLOR_LIGHT_BLUE}$(${BIN_DATE})
 ${COLOR_WHITE}Hostname                       = ${COLOR_LIGHT_BLUE}$(${BIN_HOSTNAME})
-${COLOR_WHITE}Adresse IP                     = ${COLOR_LIGHT_BLUE}$(${BIN_IP} addr show eth0 2>/dev/null | ${BIN_GREP} 'inet ' | ${BIN_SED} -e 's/.*inet \([^ ]*\)\/.*/\1/' | ${BIN_SED} ':a;N;$!ba;s/\n/, /g')
+${COLOR_WHITE}Adresse IP                     = ${COLOR_LIGHT_BLUE}$(${BIN_IP} addr show venet0 2>/dev/null | ${BIN_GREP} 'inet ' | ${BIN_SED} -e 's/.*inet \([^ ]*\)\/.*/\1/' | ${BIN_SED} ':a;N;$!ba;s/\n/, /g')
 ${COLOR_WHITE}Uptime                         = ${COLOR_LIGHT_BLUE}$(${BIN_UPTIME} | ${BIN_CUT} -d "," -f 1 | xargs)
 ${COLOR_WHITE}Load avg.                      = ${COLOR_LIGHT_BLUE}$(${BIN_UPTIME} | ${BIN_GREP} -o -e "load averages\?.*" | ${BIN_SED} -e "s/load averages\?: //")
 ${COLOR_WHITE}Release                        = ${COLOR_LIGHT_BLUE}$(${BIN_LSB_RELEASE} -d --short)
