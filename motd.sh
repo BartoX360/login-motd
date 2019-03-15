@@ -45,9 +45,9 @@ ${COLOR_WHITE}Usage CPU                      = ${COLOR_LIGHT_BLUE}$(echo $(${BIN
 ${COLOR_WHITE}Mémoire        Utilisée/Totale = ${COLOR_LIGHT_BLUE}$(${BIN_FREE} -m | ${BIN_HEAD} -n 2 | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_FREE} -m | ${BIN_HEAD} -n 2 | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})MB
 ${COLOR_WHITE}Swap           Utilisée/Totale = ${COLOR_LIGHT_BLUE}$(${BIN_FREE} -m | tail -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_FREE} -m | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})MB
 ${COLOR_WHITE}Disque(/)      Utilisée/Totale = ${COLOR_LIGHT_BLUE}$(${BIN_DF} -h / | tail -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_DF} -h / | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})
-${COLOR_DEFAULT}Commandes utile
-${COLOR_DEFAULT}purge_simlink : Permet de purger tout les liens symboliques orphelins du serveur (utile après ménage sur la Seedbox).
-${COLOR_DEFAULT}vide_swap : Permet de vider le Swap du serveur.
+${COLOR_WHITE}Commandes utile :
+${COLOR_WHITE}Purger les simlink orphelins dans /srv/seedbox = ${COLOR_LIGHT_BLUE}purge_simlink
+${COLOR_WHITE}Vider le SWAP serveur = ${COLOR_LIGHT_BLUE}vide_swap
 ${COLOR_DEFAULT}"
 
 unset BIN_DATE BIN_FIGLET BIN_HOSTNAME BIN_IP BIN_GREP BIN_SED BIN_UPTIME BIN_CAT BIN_LSB_RELEASE BIN_UNAME BIN_FREE BIN_HEAD BIN_TAIL BIN_DF BIN_AWK BIN_BC BIN_PS BIN_APT
