@@ -45,7 +45,10 @@ ${COLOR_WHITE}Usage CPU                      = ${COLOR_LIGHT_BLUE}$(echo $(${BIN
 ${COLOR_WHITE}Mémoire        Utilisée/Totale = ${COLOR_LIGHT_BLUE}$(${BIN_FREE} -m | ${BIN_HEAD} -n 2 | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_FREE} -m | ${BIN_HEAD} -n 2 | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})MB
 ${COLOR_WHITE}Swap           Utilisée/Totale = ${COLOR_LIGHT_BLUE}$(${BIN_FREE} -m | tail -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_FREE} -m | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})MB
 ${COLOR_WHITE}Disque(/)      Utilisée/Totale = ${COLOR_LIGHT_BLUE}$(${BIN_DF} -h / | tail -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_DF} -h / | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})
-${COLOR_WHITE}Commandes utile :
+${COLOR_RED}#####################
+${COLOR_RED}# Commandes utile : #
+${COLOR_RED}#####################
+
 ${COLOR_WHITE}Purger les simlink orphelins dans /srv/seedbox = ${COLOR_LIGHT_BLUE}purge_simlink
 ${COLOR_WHITE}Vider le SWAP serveur = ${COLOR_LIGHT_BLUE}vide_swap
 ${COLOR_DEFAULT}"
