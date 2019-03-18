@@ -4,6 +4,7 @@
 # 2014/05/29 @frdmn
 # 2018/07/17 @Bartox Passage en français + ajout du check de mises à jour disponible
 
+
 BIN_DATE='/bin/date'
 BIN_FIGLET='/usr/bin/figlet'
 BIN_HOSTNAME='/bin/hostname'
@@ -36,7 +37,7 @@ echo -e "
 ${COLOR_LIGHT_GREEN}$(${BIN_FIGLET} -ckw 80 -f slant $(${BIN_HOSTNAME} -s))
 ${COLOR_WHITE}Date et heure                  = ${COLOR_LIGHT_BLUE}$(${BIN_DATE})
 ${COLOR_WHITE}Hostname                       = ${COLOR_LIGHT_BLUE}$(${BIN_HOSTNAME})
-${COLOR_WHITE}Adresse IP                     = ${COLOR_LIGHT_BLUE}$(${BIN_IP} addr show venet0 2>/dev/null | ${BIN_GREP} 'inet ' | ${BIN_SED} -e 's/.*inet \([^ ]*\)\/.*/\1/' | ${BIN_SED} ':a;N;$!ba;s/\n/, /g')
+${COLOR_WHITE}Adresse IP                     = ${COLOR_LIGHT_BLUE}$(${BIN_IP} addr show enp1s0 2>/dev/null | ${BIN_GREP} 'inet ' | ${BIN_SED} -e 's/.*inet \([^ ]*\)\/.*/\1/' | ${BIN_SED} ':a;N;$!ba;s/\n/, /g')
 ${COLOR_WHITE}Uptime                         = ${COLOR_LIGHT_BLUE}$(${BIN_UPTIME} | ${BIN_CUT} -d "," -f 1 | xargs)
 ${COLOR_WHITE}Load avg.                      = ${COLOR_LIGHT_BLUE}$(${BIN_UPTIME} | ${BIN_GREP} -o -e "load averages\?.*" | ${BIN_SED} -e "s/load averages\?: //")
 ${COLOR_WHITE}Release                        = ${COLOR_LIGHT_BLUE}$(${BIN_LSB_RELEASE} -d --short)
@@ -45,11 +46,10 @@ ${COLOR_WHITE}Usage CPU                      = ${COLOR_LIGHT_BLUE}$(echo $(${BIN
 ${COLOR_WHITE}Mémoire        Utilisée/Totale = ${COLOR_LIGHT_BLUE}$(${BIN_FREE} -m | ${BIN_HEAD} -n 2 | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_FREE} -m | ${BIN_HEAD} -n 2 | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})MB
 ${COLOR_WHITE}Swap           Utilisée/Totale = ${COLOR_LIGHT_BLUE}$(${BIN_FREE} -m | tail -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_FREE} -m | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})MB
 ${COLOR_WHITE}Disque(/)      Utilisée/Totale = ${COLOR_LIGHT_BLUE}$(${BIN_DF} -h / | tail -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_DF} -h / | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})
-${COLOR_RED}#####################
-${COLOR_RED}# Commandes utile : #
-${COLOR_RED}#####################
+${COLOR_WHITE}Disque(/srv)   Utilisée/Totale = ${COLOR_LIGHT_BLUE}$(${BIN_DF} -h /srv | tail -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_DF} -h /srv | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})
 
-${COLOR_WHITE}Purger les simlink orphelins dans /srv/seedbox = ${COLOR_LIGHT_BLUE}purge_simlink
+${COLOR_RED}Commandes utile :
+${COLOR_WHITE}Purger les symlink orphelins dans /srv/seedbox = ${COLOR_LIGHT_BLUE}purge_symlink
 ${COLOR_WHITE}Vider le SWAP serveur = ${COLOR_LIGHT_BLUE}vide_swap
 ${COLOR_DEFAULT}"
 
